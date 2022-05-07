@@ -22,18 +22,28 @@
 //
 // CODE
 'use strict';
+// solution 1
+//
+// function multiplyAllPairs(arr1, arr2) {
+//   let results = [];
+//
+//   for (let index1 = 0; index1 < arr1.length; index1 += 1) {
+//     for (let index2 = 0; index2 < arr2.length; index2 += 1) {
+//       results.push(arr1[index1] * arr2[index2]);
+//     }
+//   }
+//
+//   return results.sort((a, b) => a - b);
+// }
+//
+// solution 2
 
 function multiplyAllPairs(arr1, arr2) {
   let results = [];
-
-  for (let index1 = 0; index1 < arr1.length; index1 += 1) {
-    for (let index2 = 0; index2 < arr2.length; index2 += 1) {
-      results.push(arr1[index1] * arr2[index2]);
-    }
-  }
-
+  arr1.forEach(elem1 => arr2.forEach(elem2 => results.push(elem1 * elem2)));
   return results.sort((a, b) => a - b);
 }
+
 // TESTS
 console.log(String(multiplyAllPairs([2, 4], [4, 3, 1, 2])) ===
             String([2, 4, 4, 6, 8, 8, 12, 16]));
