@@ -16,11 +16,12 @@
 // - return sum
 //
 // CODE
+'use strict';
 
 function sum(int) {
   return String(int)
     .split('')
-    .reduce((sum, digit) => sum += Number(digit), 0);
+    .reduce((sum, digit) => sum + Number(digit), 0);
 }
 
 // TESTS
