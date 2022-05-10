@@ -41,7 +41,7 @@
 'use strict';
 
 function isPalindrome(str) {
-  return str === str.slice().split('').reverse().join('');
+  return str.length > 1 && str === str.slice().split('').reverse().join('');
 }
 
 function substrings(str) {
@@ -55,18 +55,22 @@ function leadingSubstrings(str) {
   return chars.map((_, index) => str.slice(0, index + 1));
 }
 
+// function palindromes(str) {
+//   let substringsArray = substrings(str);
+//   let palindromes = [];
+//
+//   for (let index = 0; index < substringsArray.length; index += 1) {
+//     let currentSubstring = substringsArray[index];
+//     if (isPalindrome(currentSubstring) && currentSubstring.length > 1) {
+//       palindromes.push(substringsArray[index]);
+//     }
+//   }
+//
+//   return palindromes;
+// }
+
 function palindromes(str) {
-  let substringsArray = substrings(str);
-  let palindromes = [];
-
-  for (let index = 0; index < substringsArray.length; index += 1) {
-    let currentSubstring = substringsArray[index];
-    if (isPalindrome(currentSubstring) && currentSubstring.length > 1) {
-      palindromes.push(substringsArray[index]);
-    }
-  }
-
-  return palindromes;
+  return substrings(str).filter(isPalindrome);
 }
 
 // TESTS
