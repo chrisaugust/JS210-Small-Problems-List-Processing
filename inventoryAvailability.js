@@ -41,19 +41,29 @@ function transactionsFor(item, transactions) {
   return transactions.filter((trans) => trans.id === item);
 }
 
+// first solution
+// function isItemAvailable(item, transactions) {
+//   const transactionsForItem = transactionsFor(item, transactions);
+//
+//   let inventoryCount = 0;
+//   transactionsForItem.forEach(({movement, quantity}) => {
+//     if (movement === 'in') inventoryCount += quantity;
+//     if (movement === 'out') inventoryCount -= quantity;
+//   });
+//
+//   return inventoryCount > 0;
+// }
+
+// second solution, using reduce
 function isItemAvailable(item, transactions) {
   const transactionsForItem = transactionsFor(item, transactions);
 
-  let inventoryCount = 0;
-  transactionsForItem.forEach(({movement, quantity}) => {
-    if (movement === 'in') inventoryCount += quantity;
-    if (movement === 'out') inventoryCount -= quantity;
-  });
+  const count = transactionsForItem.reduce((sum, trans) => {
+    let sign = trans.movement === 'in' ? 1 : -1;
+    return sum + (sign * trans.quantity);
+  }, 0);
 
-  console.log(transactionsForItem);
-  console.log(inventoryCount);
-
-  return inventoryCount > 0;
+  return count > 0;
 }
 
 // TESTS
